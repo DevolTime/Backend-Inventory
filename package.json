@@ -1,16 +1,18 @@
 {
-  "name": "backendtech",
+  "name": "backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Backend for Tech project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node --env-file .env --watch server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "DevolTime <yefriathertua@gmail.com>",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "mongoose": "^9.7.4"
   }
