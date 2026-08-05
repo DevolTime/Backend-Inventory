@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 // Conexión con MongoDB
 import connectDB from "./src/config/config.db.js";
 
-import employeeRoutes from "./src/routes/employee.Routes.js";
+import employeeRoutes from "./src/routes/employee.routes.js";
 import inventoryRoutes from "./src/routes/inventory.routes.js";
 
 dotenv.config();

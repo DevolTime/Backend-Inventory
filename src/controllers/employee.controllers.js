@@ -9,7 +9,7 @@ import {
     dbUpdateEmployee,
     dbGetEmployeeById,
     dbRegisterAttendance
-} from '../services/employee.sevices.js'
+} from '../services/employee.services.js'
 
 // Listar empleados
 const getEmployee = async (req, res) => {
@@ -107,18 +107,22 @@ const deleteEmployee = async (req, res) => {
 
 const registerAttendance = async (req, res) => {
     try {
-        const employee = await dbRegisterAttendance(req.body)
+        // Desestructuramos el resultado enriquecido enviado por el servicio
+        const { employee, attendanceDetails } = await dbRegisterAttendance(req.body);
+        
         res.json({
-            msg: 'Horas registradas exitosamente',
-            employee
-        })
+            msg: attendanceDetails.action, // Mensaje dinámico (ej: "Salida a almuerzo registrada")
+            currentRecord: attendanceDetails.record, // El bloque del día con sus horas correspondientes
+            employeeId: employee.employeeId
+        });
     } catch (err) {
-        res.status(500).json({
+        res.status(400).json({ // Cambiado a 400 por errores de validaciones operativas
             msg: 'Hubo un problema al registrar la hora',
             error: err.message
-        })
+        });
     }
 }
+
 
 export {
     getEmployee,

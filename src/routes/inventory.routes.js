@@ -31,10 +31,7 @@ router.patch('/:id', async (req, res) => {
         const product = await ProductsM.findByIdAndUpdate(
             req.params.id,
             req.body,
-            { 
-                returnDocument: "after", 
-                runValidators: true 
-            }
+            { returnDocument: "after", runValidators: true }
         );
 
         if (!product) {
