@@ -11,10 +11,10 @@ const dbCreateProduct = async (productData) => {
     }
 
     // validacion qrCode debe ser unico
-    const existingProduct = await product.findOne({
+    const existingProduct = await Product.findOne({
         qrCode:
             productData.qrCode
-    });;
+    });
     if (existingProduct) {
         throw new Error('Producto con este codigo de barras ya existe');
     }
@@ -45,8 +45,8 @@ const dbCreateProduct = async (productData) => {
         category: productData.category,
         minStock: productData.minStock || 0,
         stock: productData.stock,
-        isActive: productData.isActive || true,
-        canBeSoldAtPos: productData.canBeSoldAtPos || true,
+        isActive: productData.isActive ?? true,
+        canBeSoldAtPos: productData.canBeSoldAtPos ?? true,
         taxes: productData.taxes || [],
         createdBy: productData.createdBy || 'System',
         createdAt: new Date()
@@ -56,12 +56,12 @@ const dbCreateProduct = async (productData) => {
 
 // obtener todos los productos
 const dbGetProduct = async () => {
-    return await product.find({ isActive: true }).populate('taxes');
+    return await Product.find({ isActive: true });
 };
 
 // Obtener productos por ID
 const dbGetProductById = async (id) => {
-    return await product.findById(id).populate('taxes');
+    return await Product.findById(id);
 };
 
 // Elimiar producto
@@ -71,17 +71,17 @@ const dbDeleteProduct = async (id) => {
 
 // Actualizar producto
 const dbUpdateProduct = async (id, updates) => {
-    return await product.findByIdAndUpdate(id, updates, { new: true }).populate('taxes');
+    return await Product.findByIdAndUpdate(id, updates, { returnDocument: 'after', runValidators: true });
 };
 
 // Obtener productos por categoría
 const dbGetProductsByCategory = async (category) => {
-    return await Product.find({ category, isActive: true }).populate('taxes');
+    return await Product.find({ category, isActive: true });
 };
 
 // Obtener producto por código de barras
 const dbGetProductsByQR = async (qrCode) => {
-    return await Product.findOne({ qrCode, isActive: true }).populate('taxes');
+    return await Product.findOne({ qrCode, isActive: true });
 };
 
 export {

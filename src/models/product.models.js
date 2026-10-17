@@ -60,10 +60,6 @@ const productSchema = new Schema({
     createdBy: {
         type: String,
         default: 'System'
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now
     }
 }, {
     timestamps: true

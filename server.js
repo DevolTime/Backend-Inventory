@@ -6,7 +6,8 @@ import dotenv from "dotenv";
 import connectDB from "./src/config/config.db.js";
 
 import employeeRoutes from "./src/routes/employee.routes.js";
-import inventoryRoutes from "./src/routes/inventory.routes.js";
+import productRoutes from "./src/routes/product.routes.js";
+import checkoutRoutes from "./src/routes/checkout.routes.js"
 
 dotenv.config();
 connectDB();
@@ -20,7 +21,8 @@ app.use(express.json());
 
 // Rutas
 app.use("/api/empleados", employeeRoutes);
-app.use("/api/inventario", inventoryRoutes);
+app.use("/api/inventario", productRoutes);
+app.use("/api/checkout", checkoutRoutes);
 
 // Ruta health
 app.get("/api/health", (req, res) => {
